@@ -1,0 +1,55 @@
+{% if not hide %}
+<div class="pagination">
+ {% block pagination_list %}
+ <ul>
+ {% block pagination_list_items %}
+ {% if page.has_previous %}
+  <li>
+    <a href="?{{ qs }}{{ page_var }}={{ page.previous_page_number }}">&lt; Prev</a>
+  </li>
+ {% endif %}
+
+ {% if page.number == 1 %}
+ <li class="disabled"><a>1</a></li>
+ {% else %}
+ <li><a href="?{{ qs }}{{ page_var }}=1">1</a></li>
+ {% endif %}
+
+ {% if l_elipse %}
+  <li class="disabled"><a>...</a></li>
+ {% endif %}
+
+ {% for linkpage in page_numbers %}
+  {% ifequal linkpage page.number %}
+   <li class="active"><a>{{ page.number }}</a></li>
+  {% else %}
+   <li><a href="?{{ qs }}{{ page_var }}={{ linkpage }}">{{ linkpage }}</a></li>
+  {% endifequal %}
+ {% endfor %}
+
+ {% if r_elipse %}
+  <li class="disabled"><a href="#">...</a></li>
+ {% endif %}
+
+ {% if page.number == paginator.num_pages %}
+  <li class="disabled"><a>{{ paginator.num_pages }}</a></li>
+ {% else %}
+  <li><a href="?{{ qs }}{{ page_var }}={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+ {% endif %}
+
+ {% if page.has_next %}
+  <li><a href="?{{ qs }}{{ page_var }}={{ page.next_page_number }}">Next &gt;</a></li>
+ {% endif %}
+
+ {% endblock %}
+ </ul>
+
+ {% if count_choices %}
+ <div class="count-choices">
+   {% include "paginator/count_choices.html" %}
+ </div>
+ {% endif %}
+
+ {% endblock %}
+</div>
+{% endif %}

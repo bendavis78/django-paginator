@@ -1,0 +1,7 @@
+<span>Show</span>
+<select>
+  {% for choice in count_choices %}
+  <option value="{{ choice }}"{% if choice == count %} selected{% endif %}>{{ choice }}</option>
+  {% endfor %}
+</select>
+<span>results page page</span>
