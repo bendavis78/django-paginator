@@ -1,0 +1,9 @@
+<div class="form-inline per-page-choices">
+  <span>Show</span>
+  <select class="form-control input-sm">
+    {% for choice in per_page_choices %}
+    <option value="{{ choice }}"{% if choice == per_page %} selected{% endif %}>{{ choice }}</option>
+    {% endfor %}
+  </select>
+  <span>results page page</span>
+</div>

@@ -1,15 +1,15 @@
 {% if not hide %}
-<div class="pagination">
+<nav class="pagination-nav">
  {% block pagination_list %}
- <ul>
+ <ul class="pagination">
  {% block pagination_list_items %}
- {% if page.has_previous %}
+ {% if page_obj.has_previous %}
   <li>
-    <a href="?{{ qs }}{{ page_var }}={{ page.previous_page_number }}">&lt; Prev</a>
+    <a href="?{{ qs }}{{ page_var }}={{ page_obj.previous_page_number }}">&lt; Prev</a>
   </li>
  {% endif %}
 
- {% if page.number == 1 %}
+ {% if page_obj.number == 1 %}
  <li class="disabled"><a>1</a></li>
  {% else %}
  <li><a href="?{{ qs }}{{ page_var }}=1">1</a></li>
@@ -20,8 +20,8 @@
  {% endif %}
 
  {% for linkpage in page_numbers %}
-  {% ifequal linkpage page.number %}
-   <li class="active"><a>{{ page.number }}</a></li>
+  {% ifequal linkpage page_obj.number %}
+   <li class="active"><a>{{ page_obj.number }}</a></li>
   {% else %}
    <li><a href="?{{ qs }}{{ page_var }}={{ linkpage }}">{{ linkpage }}</a></li>
   {% endifequal %}
@@ -31,22 +31,21 @@
   <li class="disabled"><a href="#">...</a></li>
  {% endif %}
 
- {% if page.number == paginator.num_pages %}
+ {% if page_obj.number == paginator.num_pages %}
   <li class="disabled"><a>{{ paginator.num_pages }}</a></li>
  {% else %}
   <li><a href="?{{ qs }}{{ page_var }}={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
  {% endif %}
 
- {% if page.has_next %}
-  <li><a href="?{{ qs }}{{ page_var }}={{ page.next_page_number }}">Next &gt;</a></li>
+ {% if page_obj.has_next %}
+  <li><a href="?{{ qs }}{{ page_var }}={{ page_obj.next_page_number }}">Next &gt;</a></li>
  {% endif %}
 
  {% endblock %}
  </ul>
 
- {% if count_choices %}
- <div class="count-choices">
-   {% include "paginator/count_choices.html" %}
+ {% if per_page_choices %}
+   {% include "paginator/per_page_choices.html" %}
  </div>
  {% endif %}
 
