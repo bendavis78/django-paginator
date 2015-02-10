@@ -41,9 +41,6 @@ def paginator(context, page_obj=None, paginator=None, adjacent=3,
                 "`per_page_choices` must consist of only integers seprated "
                 "by commas.")
 
-    if per_page_choices:
-        per_page_choices = map(str, per_page_choices)
-
     num_pages = paginator.num_pages
     if num_pages <= 1:
         return {'hide': True}
